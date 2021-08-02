@@ -13,9 +13,13 @@ describe Oystercard do
     .to raise_error 'Maximum balance exceeded'
   end
 
-  it "should allow the fare to be deducted from the card" do
+  it "should allow the fare to be deducted from the card when journey is complete" do
     subject.tap_in
     expect(subject.tap_out(500)).to eq(0)
+  end
+
+  it "should raise error since we are tapping out without starting a journey before" do
+    expect{ subject.tap_out(500) }.to raise_error("Please seek assistance from a amember of staff")
   end
 
   it "shows that Oystercard has a method called tap_in and tap_out" do

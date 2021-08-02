@@ -36,9 +36,9 @@ class Oystercard
   end
   
   def raise_errors_verify_fare(fare)
-    @journey = @journeys.last
+    @journey = (@journeys.empty?) ? :none : @journeys.last
     raise "Please seek assistance from a amember of staff" if journey_is_complete_already?
-    fare.is_a?(Integer) ? @fare = fare : @fare = fare.get_price(@journey.reader[:started_at], @terminal)
+    fare.is_a?(Integer) ? @fare = fare : @fare = fare.get_price(@journey.content_view[:started_at], @terminal)
     raise "Not enough balance balace, please top-up" if not_enough_balance?
   end
 
@@ -47,13 +47,13 @@ class Oystercard
   end
 
   def complete_journey
-    @journey.reader[:ended_at_time] = Time.now.to_i
-    @journey.reader[:ended_at] = @terminal
-    @journey.reader[:fare] = @fare
+    @journey.content_view[:ended_at_time] = Time.now.to_i
+    @journey.content_view[:ended_at] = @terminal
+    @journey.content_view[:fare] = @fare
   end
 
   def journey_is_complete_already?
-    (defined?(@journey) && @journey.reader[:fare] != :none) ? true : false
+    ((@journey == :none) || (@journey.content_view[:fare] != :none)) ? true : false
   end
 
   def not_enough_balance?

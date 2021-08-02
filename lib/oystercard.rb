@@ -22,4 +22,8 @@ class Oystercard
     @terminal = terminal
     @terminal.subtract_balance(self, fare)
   end
+
+  def tap_in(terminal = Station_Terminal_Out.new)
+    @terminal = terminal
+  end
 end

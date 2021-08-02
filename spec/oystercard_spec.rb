@@ -14,6 +14,6 @@ describe Oystercard do
   end
 
   it "should allow the fare to be deducted from the card" do
-    expect(subject.station_terminal_out.subtract_balance(subject, 500)).to eq(0)
+    expect(subject.tap_out(500)).to eq(0)
   end
 end

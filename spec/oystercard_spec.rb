@@ -13,18 +13,25 @@ describe Oystercard do
     .to raise_error 'Maximum balance exceeded'
   end
 
+  it "shows that Oystercard has a method called tap_in and tap_out" do
+    expect(subject).to respond_to :tap_in
+    expect(subject).to respond_to :tap_out
+  end
+
   it "should allow the fare to be deducted from the card when journey is complete" do
     subject.tap_in
     expect(subject.tap_out(500)).to eq(0)
   end
 
-  it "should raise error since we are tapping out without starting a journey before" do
-    expect{ subject.tap_out(500) }.to raise_error("Please seek assistance from a amember of staff")
+  it "should raise error since we are tapping out without tapping in before" do
+    expect{ subject.tap_out(500) }
+    .to raise_error("Please seek assistance from a member of staff")
   end
 
-  it "shows that Oystercard has a method called tap_in and tap_out" do
-    expect(subject).to respond_to :tap_in
-    expect(subject).to respond_to :tap_out
+  it "should raise error since we are tapping in twice without tapping out in between" do
+    subject.tap_in
+    expect{ subject.tap_in }
+    .to raise_error("Please seek assistance from a member of staff")
   end
 
   it "check the minimum amount for a single journey and raises an error" do

@@ -23,23 +23,29 @@ class Oystercard
 
   def tap_in(terminal = Station_Terminal_In.new)
     @terminal = terminal
-    @terminal.verify_ballance(self)
+    raise_errors_verify_balance_in
     @journey = start_journey
     @journeys.push(@journey)
   end
 
   def tap_out(fare = Price_Maker.new, terminal = Station_Terminal_Out.new)
     @terminal = terminal
-    raise_errors_verify_fare(fare)
+    raise_errors_verify_fare_out(fare)
     complete_journey
     @terminal.subtract_balance(self, @fare)
   end
   
-  def raise_errors_verify_fare(fare)
+  def raise_errors_verify_fare_out(fare)
     @journey = (@journeys.empty?) ? :none : @journeys.last
-    raise "Please seek assistance from a amember of staff" if journey_is_complete_already?
+    raise "Please seek assistance from a member of staff" if last_journey_is_complete?
     fare.is_a?(Integer) ? @fare = fare : @fare = fare.get_price(@journey.content_view[:started_at], @terminal)
     raise "Not enough balance balace, please top-up" if not_enough_balance?
+  end
+
+  def raise_errors_verify_balance_in
+    @journey = (@journeys.empty?) ? :none : @journeys.last
+    @terminal.verify_ballance(self)
+    raise "Please seek assistance from a member of staff" if last_journey_not_complete?
   end
 
   def start_journey
@@ -52,7 +58,11 @@ class Oystercard
     @journey.content_view[:fare] = @fare
   end
 
-  def journey_is_complete_already?
+  def last_journey_not_complete?
+    ((@journey != :none) && (@journey.content_view[:fare] == :none)) ? true : false
+  end
+
+  def last_journey_is_complete?
     ((@journey == :none) || (@journey.content_view[:fare] != :none)) ? true : false
   end
 

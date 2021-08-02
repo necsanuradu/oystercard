@@ -7,7 +7,7 @@ class Station_Terminal_Out
   end
   
   def raise_barrier
-    puts "Thank you, for traveling with us!"
+    # puts "Thank you, for traveling with us!"
   end
 
 end

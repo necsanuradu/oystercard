@@ -6,7 +6,7 @@ require './lib/price_maker.rb'
 
 class Oystercard
   attr_accessor :balance, :terminal
-  attr_reader :max_balance
+  attr_reader :max_balance, :journeys
 
   BALANCE = 500
   MAX_BALANCE = 10000
@@ -56,6 +56,7 @@ class Oystercard
     @journey.content_view[:ended_at_time] = Time.now.to_i
     @journey.content_view[:ended_at] = @terminal
     @journey.content_view[:fare] = @fare
+    puts "Your journey started at #{@journey.content_view[:started_at].object_id} station"
   end
 
   def last_journey_not_complete?

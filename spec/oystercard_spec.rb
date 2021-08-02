@@ -40,4 +40,10 @@ describe Oystercard do
     expect{ subject.tap_in }
     .to raise_error("Please top-up, not enough credit")
   end
+
+  it "shows where I've travelled from" do
+    from = Station_Terminal_In.new
+    subject.tap_in(from)
+    expect(subject.journeys.last.content_view[:started_at].object_id).to eq(from.object_id)
+  end
 end

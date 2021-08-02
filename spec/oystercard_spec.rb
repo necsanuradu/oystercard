@@ -17,4 +17,16 @@ describe Oystercard do
     subject.tap_in
     expect(subject.tap_out(500)).to eq(0)
   end
+
+  it "shows that Oystercard has a method called tap_in and tap_out" do
+    expect(subject).to respond_to :tap_in
+    expect(subject).to respond_to :tap_out
+  end
+
+  it "check the minimum amount for a single journey and raises an error" do
+    subject.tap_in # balance is 500
+    subject.tap_out(500) # balane is 0
+    expect{ subject.tap_in }
+    .to raise_error("Please top-up, not enough credit")
+  end
 end

@@ -2,6 +2,7 @@ require './lib/user_terminal.rb'
 require './lib/station_terminal_out.rb'
 require './lib/station_terminal_in.rb'
 require './lib/journey.rb'
+require './lib/price_maker.rb'
 
 class Oystercard
   attr_accessor :balance, :terminal

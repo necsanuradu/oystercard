@@ -6,7 +6,7 @@ class Station_Terminal_In
   
   def verify_ballance(card)
     @card = card
-    raise "Please top-up, minimum amount: #{@min_fare} p" if verify_ballance?
+    raise "Please top-up, not enough credit" if verify_ballance?
     raise_barrier
   end
 

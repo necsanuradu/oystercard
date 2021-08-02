@@ -14,6 +14,7 @@ describe Oystercard do
   end
 
   it "should allow the fare to be deducted from the card" do
+    subject.tap_in
     expect(subject.tap_out(500)).to eq(0)
   end
 end

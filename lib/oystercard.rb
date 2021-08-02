@@ -1,4 +1,5 @@
-require "./lib/user_terminal.rb"
+require './lib/user_terminal.rb'
+require './lib/station_terminal_out.rb'
 
 class Oystercard
   attr_accessor :balance, :terminal
@@ -15,5 +16,10 @@ class Oystercard
 
   def connect_user_terminal(terminal = User_Terminal.new)
     @terminal = terminal
+  end
+
+  def tap_out(fare, terminal = Station_Terminal_Out.new)
+    @terminal = terminal
+    @terminal.subtract_balance(self, fare)
   end
 end

@@ -13,8 +13,8 @@ class Oystercard
     @journeys = Array.new
   end
 
-  def connect_user_terminal(terminal = User_Terminal.new)
-    @terminal = terminal
+  def add_balance(amount, terminal = User_Terminal.new)
+    terminal.add_balance(self, amount)
   end
 
   def tap_in(terminal = Station_Terminal_In.new)

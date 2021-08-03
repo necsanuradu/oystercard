@@ -4,12 +4,12 @@ describe Oystercard do
     expect(subject.balance).to eq(500)
   end
 
-  it "would add 200 balance to the card having default balance of 500 pence" do
-    expect(subject.connect_user_terminal.add_balance(subject, 200)).to eq(700)
+  it "would add 200 balance increasing the default balance of 500 pence" do
+    expect{ subject.add_balance(200) }.to change{ subject.balance }.by 200
   end
 
   it "should prevent the user from adding too much money" do
-    expect {subject.connect_user_terminal.add_balance(subject, 9501)}
+    expect {subject.add_balance(9501)}
     .to raise_error 'Maximum balance exceeded'
   end
 

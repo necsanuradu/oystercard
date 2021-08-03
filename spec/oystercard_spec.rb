@@ -47,3 +47,12 @@ describe Oystercard do
     expect(subject.journeys.last.content_view[:started_at].object_id).to eq(from.object_id)
   end
 end
+
+=begin
+    describe '#top_up' do
+      it { is_expected.to respond_to(:top_up).with(1).argument }
+    end
+    it 'should top_up the balance' do 
+        expect{ card.top_up 1}.to change{card.balance }.by 1
+    end
+=end

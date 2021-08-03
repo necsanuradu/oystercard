@@ -1,4 +1,10 @@
 class User_Terminal
+    attr_reader :max_balance
+    MAX_BALANCE = 10000
+  def initialize
+    @max_balance = MAX_BALANCE
+  end
+
   def add_balance(card, amount = 1) # 1 pence
     @card = card
     @amount = amount
@@ -7,6 +13,6 @@ class User_Terminal
   end
 
   def max_balance_exeded?
-    (@card.balance + @amount > @card.max_balance) ? true : false
+    (@card.balance + @amount > @max_balance) ? true : false
   end
 end

@@ -5,15 +5,12 @@ require './lib/journey.rb'
 require './lib/price_maker.rb'
 
 class Oystercard
-  attr_accessor :balance, :terminal
-  attr_reader :max_balance, :journeys
-
+  attr_accessor :balance
+  attr_reader :journeys, :terminal
   BALANCE = 500
-  MAX_BALANCE = 10000
   def initialize(balance = BALANCE, history = Array.new)
     @balance = balance
     @history = history
-    @max_balance = MAX_BALANCE
     @journeys = Array.new
   end
 

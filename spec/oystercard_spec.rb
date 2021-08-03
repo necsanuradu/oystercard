@@ -20,11 +20,12 @@ describe Oystercard do
 
   it "should allow the fare to be deducted from the card when journey is complete" do
     subject.tap_in
-    expect(subject.tap_out(500)).to eq(0)
+    balance = subject.balance
+    expect(subject.tap_out).not_to be(balance)
   end
 
   it "should raise error since we are tapping out without tapping in before" do
-    expect{ subject.tap_out(500) }
+    expect{ subject.tap_out }
     .to raise_error("Please seek assistance from a member of staff")
   end
 
@@ -35,8 +36,7 @@ describe Oystercard do
   end
 
   it "check the minimum amount for a single journey and raises an error" do
-    subject.tap_in # balance is 500
-    subject.tap_out(500) # balane is 0
+    subject.balance = 0
     expect{ subject.tap_in }
     .to raise_error("Please top-up, not enough credit")
   end
@@ -44,7 +44,7 @@ describe Oystercard do
   it "shows where I've travelled from" do
     from = Station_Terminal_In.new
     subject.tap_in(from)
-    expect(subject.journeys.last.content_view[:started_at].object_id).to eq(from.object_id)
+    expect(subject.journeys.last.content_view[:from_station].object_id).to eq(from.object_id)
   end
 end
 

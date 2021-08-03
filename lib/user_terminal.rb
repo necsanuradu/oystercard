@@ -1,6 +1,6 @@
 class User_Terminal
     attr_reader :max_balance
-    MAX_BALANCE = 10000
+    MAX_BALANCE = 900
   def initialize
     @max_balance = MAX_BALANCE
   end

@@ -1,12 +1,10 @@
 class Journey
     attr_accessor :content_view
-  def initialize(started_at)
-    @started_at = started_at
-    @content_view = {started_at: @started_at,
-    started_at_time: Time.now.to_i,
-    fare: :none,
-    ended_at: :none,
-    ended_at_time: :none}
+  def initialize(from_station)
+    @content_view = {from_station: from_station,
+    from_time: Time.now.to_i,
+    to_station: :none,
+    to_time: :none,
+    fare: :none}
   end
-
 end

@@ -37,6 +37,8 @@ describe Oystercard do
 
   context 'tapping out without tapping in' do
     it "should charge a penalty fare" do
+      subject.touch_in
+      subject.touch_out
       expect{ subject.touch_out }.to change{ subject.balance }.by(-6)
     end
   end

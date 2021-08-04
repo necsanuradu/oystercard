@@ -18,6 +18,17 @@ describe Oystercard do
     expect(subject).to respond_to :touch_out
   end
 
+  it "shows the in_journey? status being changed by touch_in"  do
+    subject.touch_in
+    expect(subject.in_journey?).to eq(true)
+  end
+
+  it "shows the in_journey? status being chenged by touch_out" do
+    subject.touch_in
+    subject.touch_out
+    expect(subject.in_journey?).to eq(false)
+  end
+
   it "should allow the fare to be deducted from the card when journey is complete" do
     subject.touch_in
     balance = subject.balance
@@ -46,6 +57,9 @@ describe Oystercard do
     subject.touch_in(from)
     expect(subject.journeys.last.content_view[:from_station].object_id).to eq(from.object_id)
   end
+
+  
+
 end
 
 =begin

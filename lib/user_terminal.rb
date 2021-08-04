@@ -19,14 +19,17 @@ class User_Terminal
 
   def history(oystercard)
     oystercard.journeys.each_with_index do |journey, index|
-      if journey.content_view[:fare] != :none
-        start_date = Time.at(journey.content_view[:from_time]).to_date.to_s
-        start_station = journey.content_view[:from_station].object_id
-        end_date = Time.at(journey.content_view[:to_time]).to_date.to_s
-        end_station = journey.content_view[:to_station].object_id
-        fare = journey.content_view[:fare]
-        puts "#{start_date} #{start_station} Station to #{end_date} #{end_station} Station - £#{fare.to_f/100}"
-      end
+      start_date = Time.at(journey.content_view[:from_time]).to_date.to_s
+      start_station = journey.content_view[:from_station].object_id
+      puts "#{start_date} #{start_station} Station \n to"
+      (journey.content_view[:fare] != :none) ? puts_end_journey(journey) : nil
     end
+  end
+
+  def get_end_journey(journey)
+    @end_date = Time.at(journey.content_view[:to_time]).to_date.to_s
+    @end_station = journey.content_view[:to_station].object_id
+    @fare = journey.content_view[:fare]
+    puts "#{@end_date} #{@end_station} Station - £#{@fare.to_f/100}"
   end
 end

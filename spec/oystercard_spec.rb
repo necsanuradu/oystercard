@@ -35,9 +35,10 @@ describe Oystercard do
     expect(subject.touch_out).not_to be(balance)
   end
 
-  it "should raise error since we are tapping out without tapping in before" do
-    expect{ subject.touch_out }
-    .to raise_error("Please seek assistance from a member of staff")
+  context 'tapping out without tapping in' do
+    it "should charge a penalty fare" do
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-6)
+    end
   end
 
   it "should raise error since we are tapping in twice without tapping out in between" do

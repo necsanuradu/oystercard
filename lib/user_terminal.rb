@@ -1,3 +1,4 @@
+require 'date'
 class User_Terminal
     attr_reader :max_balance
     MAX_BALANCE = 900
@@ -14,5 +15,18 @@ class User_Terminal
 
   def max_balance_exeded?
     (@oystercard.balance + @amount > @max_balance) ? true : false
+  end
+
+  def history(oystercard)
+    oystercard.journeys.each_with_index do |journey, index|
+      if journey.content_view[:fare] != :none
+        start_date = Time.at(journey.content_view[:from_time]).to_date.to_s
+        start_station = journey.content_view[:from_station].object_id
+        end_date = Time.at(journey.content_view[:to_time]).to_date.to_s
+        end_station = journey.content_view[:to_station].object_id
+        fare = journey.content_view[:fare]
+        puts "#{start_date} #{start_station} Station to #{end_date} #{end_station} Station - £#{fare.to_f/100}"
+      end
+    end
   end
 end

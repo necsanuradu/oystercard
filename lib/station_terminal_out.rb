@@ -1,6 +1,7 @@
 class Station_Terminal_Out
   
-  def tap_out(oystercard, fare = Price_Maker.new)
+  def touch_out(oystercard, fare = Price_Maker.new)
+    oystercard.in_journey = false
     @oystercard = oystercard
     @fare = fare
     raise_errors_tap_out

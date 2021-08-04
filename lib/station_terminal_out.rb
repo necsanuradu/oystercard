@@ -19,7 +19,7 @@ class Station_Terminal_Out
     journey.content_view[:to_station] = self
     journey.content_view[:to_time] = Time.now.to_i
     journey.content_view[:fare] = @fare
-    subtract_balance
+    deduct
   end
 
   def last_journey_is_complete?
@@ -34,7 +34,7 @@ class Station_Terminal_Out
     @oystercard.journeys.last
   end
 
-  def subtract_balance
+  def deduct
     raise_barrier
     @oystercard.balance -= @fare
   end

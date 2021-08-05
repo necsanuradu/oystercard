@@ -7,6 +7,5 @@ class Price_Maker
     @to_zone = to_zone
     @to_time = Time.now.to_i
     return 300
-    # return rand(100..350)
   end
 end

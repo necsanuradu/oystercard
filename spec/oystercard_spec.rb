@@ -16,15 +16,15 @@ describe Oystercard do
     .to raise_error 'Maximum balance exceeded'
   end
 
-  it "shows the in_journey? status being changed by touch"  do
+  it "shows the in_journey status being changed by touch"  do
     station.terminal_in.touch(subject)
-    expect(subject.in_journey?).to eq(true)
+    expect(subject.in_journey).to eq(true)
   end
 
-  it "shows the in_journey? status being changed by touch" do
+  it "shows the in_journey status being changed by touch" do
     station.terminal_in.touch(subject)
     station.terminal_out.touch(subject)
-    expect(subject.in_journey?).to eq(false)
+    expect(subject.in_journey).to eq(false)
   end
 
   it "should allow the fare to be deducted from the card when journey is complete" do

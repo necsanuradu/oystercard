@@ -8,8 +8,8 @@ class Station
   def initialize(name = ("a".."g").to_a.shuffle.join.capitalize, zone = rand(1..5))
     @name = name
     @zone = zone
-    @terminal_in = Station_Terminal_In.new
-    @terminal_out = Station_Terminal_Out.new
+    @terminal_in = Station_Terminal_In.new(@name, @zone)
+    @terminal_out = Station_Terminal_Out.new(@name, @zone)
     @user_terminal = User_Terminal.new
   end
 end

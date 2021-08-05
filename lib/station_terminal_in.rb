@@ -1,24 +1,31 @@
 class Station_Terminal_In
   MIN_FARE = 100
-  def initialize 
+  def initialize(name, zone)
+    @name = name
+    @zone = zone
     @minimum_fare = MIN_FARE
   end
 
   def touch_in(oystercard)
     oystercard.in_journey = true
     @oystercard = oystercard
-    raise_errors_tap_in
-    @journey = start_journey
-    @oystercard.journeys.push(@journey)
+    if raise_errors_tap_in?
+      @journey = start_journey
+      @oystercard.journeys.push(@journey)
+    end
   end
 
-  def raise_errors_tap_in
+  def raise_errors_tap_in?
+    if last_journey_not_complete? 
+      deduct(@oystercard, 600)
+      return false
+    end
     verify_minimum_required_ballance
-    raise "Please seek assistance from a member of staff" if last_journey_not_complete?
+    true
   end
 
   def start_journey
-    Journey.new(self)
+    Journey.new(@name, @zone)
   end
 
   def last_journey_not_complete?
@@ -32,5 +39,10 @@ class Station_Terminal_In
 
   def raise_barrier
     puts "Thank you, please enjoy your journey!"
+  end
+
+  def deduct(oystercard, fare)
+    raise_barrier
+    oystercard.balance -= fare
   end
 end

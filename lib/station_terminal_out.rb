@@ -9,7 +9,7 @@ class Station_Terminal_Out
   
   def raise_errors_tap_out?
     if last_journey_is_complete? 
-       deduct(6)
+       deduct(600)
        return false
     end
     !@fare.is_a?(Integer) ? @fare = @fare.set_value(journey, @terminal) : nil

@@ -39,7 +39,7 @@ describe Oystercard do
     it "should charge a penalty fare" do
       subject.touch_in
       subject.touch_out
-      expect{ subject.touch_out }.to change{ subject.balance }.by(-6)
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-600)
     end
   end
 

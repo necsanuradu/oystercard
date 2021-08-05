@@ -6,13 +6,11 @@ class Oystercard
   attr_accessor :balance, :journeys, :in_journey
   attr_reader :terminal
   BALANCE = 500
+
   def initialize(balance = BALANCE, history = Array.new)
     @balance = balance
     @journeys = Array.new
     @in_journey = false
   end
 
-  def in_journey?
-    @in_journey
-  end
 end

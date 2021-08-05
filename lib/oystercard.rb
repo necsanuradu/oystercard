@@ -4,7 +4,6 @@ require "./lib/station.rb"
 
 class Oystercard
   attr_accessor :balance, :journeys, :in_journey
-  attr_reader :terminal
   BALANCE = 500
 
   def initialize(balance = BALANCE, history = Array.new)

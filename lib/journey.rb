@@ -9,6 +9,6 @@ class Journey
       to_zone: :none,
       to_time: :none,
       fare: :none
-  }
+    }
   end
 end

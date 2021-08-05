@@ -29,7 +29,7 @@ describe Oystercard do
 
   it "should allow the fare to be deducted from the card when journey is complete" do
     station.terminal_in.touch(subject)
-    expect{ station.terminal_out.touch(subject, 300) }.to change{ subject.balance }.by(-300)
+    expect{ station.terminal_out.touch(subject) }.to change{ subject.balance }.by(-300)
   end
 
   context 'tapping out without tapping in' do

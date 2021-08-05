@@ -18,7 +18,6 @@ class Station_Terminal_Out
     end
     @fare = @fare.set_value(journey, @name, @zone)
     raise "Not enough balance balace, please top-up" if not_enough_balance?
-    puts "Your journey started at #{journey.content_view[:from_station].object_id} station"
     true
   end
 

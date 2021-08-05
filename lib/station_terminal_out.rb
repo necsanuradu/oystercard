@@ -4,10 +4,10 @@ class Station_Terminal_Out
     @zone = zone
   end
 
-  def touch(oystercard, fare = Price_Maker.new)
+  def touch(oystercard)
     oystercard.in_journey = false
     @oystercard = oystercard
-    @fare = fare
+    @fare = Price_Maker.new
     raise_errors_tap_out? ? complete_journey : nil
   end
   
@@ -16,7 +16,7 @@ class Station_Terminal_Out
       deduct(@oystercard, 600)
       return false
     end
-    !@fare.is_a?(Integer) ? @fare = @fare.set_value(journey, @name, @zone) : nil
+    @fare = @fare.set_value(journey, @name, @zone)
     raise "Not enough balance balace, please top-up" if not_enough_balance?
     puts "Your journey started at #{journey.content_view[:from_station].object_id} station"
     true

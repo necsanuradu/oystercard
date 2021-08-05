@@ -62,9 +62,7 @@ describe Oystercard do
     expect(subject.journeys.last.content_view[:from_station]).to eq("Paddington")
   end
 
-  it "it shows all previous trips" do 
-    expect(subject.history).to eq (true)
-  end
+
 
 end
 

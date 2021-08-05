@@ -6,7 +6,7 @@ class Station_Terminal_In
     @minimum_fare = MIN_FARE
   end
 
-  def touch_in(oystercard)
+  def touch(oystercard)
     oystercard.in_journey = true
     @oystercard = oystercard
     if raise_errors_tap_in?

@@ -4,7 +4,7 @@ class Station_Terminal_Out
     @zone = zone
   end
 
-  def touch_out(oystercard, fare = Price_Maker.new)
+  def touch(oystercard, fare = Price_Maker.new)
     oystercard.in_journey = false
     @oystercard = oystercard
     @fare = fare

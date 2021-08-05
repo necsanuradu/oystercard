@@ -16,49 +16,49 @@ describe Oystercard do
     .to raise_error 'Maximum balance exceeded'
   end
 
-  it "shows the in_journey? status being changed by touch_in"  do
-    station.terminal_in.touch_in(subject)
+  it "shows the in_journey? status being changed by touch"  do
+    station.terminal_in.touch(subject)
     expect(subject.in_journey?).to eq(true)
   end
 
-  it "shows the in_journey? status being changed by touch_out" do
-    station.terminal_in.touch_in(subject)
-    station.terminal_out.touch_out(subject)
+  it "shows the in_journey? status being changed by touch" do
+    station.terminal_in.touch(subject)
+    station.terminal_out.touch(subject)
     expect(subject.in_journey?).to eq(false)
   end
 
   it "should allow the fare to be deducted from the card when journey is complete" do
-    station.terminal_in.touch_in(subject)
-    expect{ station.terminal_out.touch_out(subject, 300) }.to change{ subject.balance }.by(-300)
+    station.terminal_in.touch(subject)
+    expect{ station.terminal_out.touch(subject, 300) }.to change{ subject.balance }.by(-300)
   end
 
   context 'tapping out without tapping in' do
     it "should charge a penalty fare in the amopunt of 600" do
-      station.terminal_in.touch_in(subject)
-      station.terminal_out.touch_out(subject)
-      expect{ station.terminal_out.touch_out(subject) }
+      station.terminal_in.touch(subject)
+      station.terminal_out.touch(subject)
+      expect{ station.terminal_out.touch(subject) }
       .to change{ subject.balance }.by(-600)
     end
   end
 
   context "whentapping in twice without tapping out in between" do
     it "should charge a penalty fare in the amount of 600" do
-      station.terminal_in.touch_in(subject)
-      expect{ station.terminal_in.touch_in(subject) }
+      station.terminal_in.touch(subject)
+      expect{ station.terminal_in.touch(subject) }
       .to change{ subject.balance }.by(-600)
     end
   end
 
-  context "when touch_in" do
+  context "when touch" do
     it "check the minimum amount for a single journey and raises an error" do
       subject.balance = 0
-      expect{ station.terminal_in.touch_in(subject) }
+      expect{ station.terminal_in.touch(subject) }
       .to raise_error("Please top-up, not enough credit")
     end
   end
 
   it "shows where I've travelled from" do
-    station_from.terminal_in.touch_in(subject)
+    station_from.terminal_in.touch(subject)
     expect(subject.journeys.last.content_view[:from_station]).to eq("Paddington")
   end
 

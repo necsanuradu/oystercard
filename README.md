@@ -55,7 +55,7 @@ I want to know what zone a station is in
 ```
 In order to be charged correctly
 As a customer
-I need a penalty charge deducted if I fail to touch in or out
+I need a penalty charge deducted if I fail to touch in or out at any given time
 ```
 ```
 In order to be charged the correct amount

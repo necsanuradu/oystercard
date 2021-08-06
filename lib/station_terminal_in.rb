@@ -1,5 +1,6 @@
 class Station_Terminal_In
   MIN_FARE = 100
+
   def initialize(name, zone)
     @name = name
     @zone = zone
@@ -9,17 +10,11 @@ class Station_Terminal_In
   def touch(oystercard)
     oystercard.in_journey = true
     @oystercard = oystercard
-    if raise_errors_tap_in?
-      @journey = start_journey
-      @oystercard.journeys.push(@journey)
-    end
+    (@journey = start_journey; @oystercard.journeys.push(@journey)) if raise_errors_tap_in?
   end
 
   def raise_errors_tap_in?
-    if last_journey_not_complete? 
-      deduct(@oystercard, 600)
-      return false
-    end
+    (deduct(@oystercard, 600); return false) if last_journey_not_complete? 
     verify_minimum_required_ballance
     true
   end

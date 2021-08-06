@@ -1,11 +1,9 @@
 class Price_Maker
-  def set_value(journey, to_station, to_zone)
-    @from_station = journey.content_view[:from_station]
-    @from_zone = journey.content_view[:from_zone]
-    @from_time = journey.content_view[:from_time]
-    @to_station = to_station
-    @to_zone = to_zone
-    @to_time = Time.now.to_i
-    return 300
+
+  def set_value(journey, to_station, to_zone, to_time = Time.now.to_i)
+    journey = journey.content_view
+    @from_zone, @from_time, @from_station = journey[:from_zone], journey[:from_time], journey[:from_station]
+    return 300 # until we get set value how to..xwwxw
   end
+
 end

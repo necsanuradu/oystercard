@@ -1,31 +1,25 @@
 class Station_Terminal_Out
+   
   def initialize(name, zone)
     @name = name
     @zone = zone
   end
 
   def touch(oystercard)
-    oystercard.in_journey = false
     @oystercard = oystercard
     @fare = Price_Maker.new
-    raise_errors_tap_out? ? complete_journey : nil
+    complete_journey if raise_errors_tap_out? 
   end
   
   def raise_errors_tap_out?
-    if last_journey_is_complete? 
-      deduct(@oystercard, 600)
-      return false
-    end
-    @fare = @fare.set_value(journey, @name, @zone)
+    (deduct(@oystercard, 600); return false) if last_journey_is_complete? 
     raise "Not enough balance balace, please top-up" if not_enough_balance?
     true
   end
 
-  def complete_journey
-    journey.content_view[:to_station] = @name
-    journey.content_view[:to_time] = Time.now.to_i
-    journey.content_view[:to_zone] = @zone
-    journey.content_view[:fare] = @fare
+  def complete_journey(content = journey.content_view)
+    content[:to_station], content[:to_station] = @name, Time.now.to_i
+    content[:to_zone], content[:fare]  = @zone, @fare
     deduct(@oystercard, @fare)
   end
 
@@ -34,6 +28,7 @@ class Station_Terminal_Out
   end
 
   def not_enough_balance?
+    @fare = @fare.set_value(journey, @name, @zone)
     @oystercard.balance < @fare
   end
 
@@ -42,6 +37,7 @@ class Station_Terminal_Out
   end
 
   def deduct(oystercard, fare)
+    oystercard.in_journey = false
     raise_barrier
     oystercard.balance -= fare
   end

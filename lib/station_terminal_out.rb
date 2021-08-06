@@ -1,4 +1,4 @@
-class Station_Terminal_Out
+class StationTerminalOut 
    
   def initialize(name, zone)
     @name = name
@@ -7,7 +7,7 @@ class Station_Terminal_Out
 
   def touch(oystercard)
     @oystercard = oystercard
-    @fare = Price_Maker.new
+    @fare = PriceMaker.new
     complete_journey if raise_errors_tap_out? 
   end
   

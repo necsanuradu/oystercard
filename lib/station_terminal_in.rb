@@ -1,4 +1,4 @@
-class Station_Terminal_In
+class StationTerminalIn 
   MIN_FARE = 100
 
   def initialize(name, zone)
@@ -40,4 +40,5 @@ class Station_Terminal_In
     raise_barrier
     oystercard.balance -= fare
   end
+
 end

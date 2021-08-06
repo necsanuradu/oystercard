@@ -1,5 +1,5 @@
 require 'date'
-class User_Terminal
+class UserTerminal 
   attr_reader :max_balance
   MAX_BALANCE = 900
 

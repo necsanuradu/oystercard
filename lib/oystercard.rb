@@ -2,7 +2,7 @@ require './lib/journey.rb'
 require './lib/price_maker.rb'
 require "./lib/station.rb"
 
-class Oystercard
+class Oystercard 
   attr_accessor :balance, :journeys, :in_journey
   BALANCE = 500
 

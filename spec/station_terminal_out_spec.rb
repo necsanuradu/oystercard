@@ -1,8 +1,8 @@
 require "./lib/oystercard.rb"
 require "./lib/station_terminal_out.rb"
-describe Station_Terminal_Out do 
+describe StationTerminalOut do 
   subject{ described_class.new("Paddington", 1) }
-  let(:oystercard){ Oystercard.new }
+  let(:oystercard){ Oystercard.new } 
   it "shows that terminal out has a method touch" do
     expect(subject).to respond_to :touch
   end

@@ -1,4 +1,4 @@
-class Price_Maker
+class PriceMaker 
 
   def set_value(journey, to_station, to_zone, to_time = Time.now.to_i)
     journey = journey.content_view

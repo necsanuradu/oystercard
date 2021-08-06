@@ -2,6 +2,12 @@
 
 ## User stories:
 
+ Objects  | Messages
+------------- | -------------
+Person  | 
+Bike  | working? | available
+Docking station | release_bike | docking_bike 
+
 |In order to use public transport|
 |As a customer|
 |I want money on my card|

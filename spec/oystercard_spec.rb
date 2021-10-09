@@ -1,5 +1,5 @@
 require "./lib/oystercard.rb"
-describe Oystercard do 
+describe Oystercard do  
   let(:station){ Station.new("Stratford", 4) }
   let(:station_from){ Station.new("Paddington", 1) }
   let(:station_to){ Station.new("North Finchley", 3) }
